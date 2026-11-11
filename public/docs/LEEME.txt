@@ -1,0 +1,6 @@
+Documentos descargables
+=======================
+Mientras no existan, el sitio muestra un placeholder con el nombre esperado.
+
+certificado-iso-27001.pdf   (ISO/IEC 27001:2022)
+certificado-iso-9001.pdf   (ISO 9001:2015)

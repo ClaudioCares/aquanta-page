@@ -1,0 +1,16 @@
+{
+  "buildCommand": "npx vite build",
+  "outputDirectory": "dist",
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/data-center-2", "destination": "/servicios/data-center", "permanent": true },
+    { "source": "/ciberseguridad-y-fraude", "destination": "/servicios/ciberseguridad", "permanent": true },
+    { "source": "/energia", "destination": "/servicios/energia", "permanent": true },
+    { "source": "/cloud", "destination": "/servicios/cloud", "permanent": true },
+    { "source": "/servicios-profesionales", "destination": "/servicios/servicios-profesionales", "permanent": true },
+    { "source": "/oportunidad-laboral", "destination": "/trabaja-con-nosotros", "permanent": true },
+    { "source": "/certificados-iso", "destination": "/certificaciones", "permanent": true },
+    { "source": "/politica-de-calidad-y-seguridad-de-la-informacion", "destination": "/politica-de-calidad", "permanent": true }
+  ],
+  "rewrites": [{ "source": "/((?!assets/|img/|logo/|docs/|video/|favicon).*)", "destination": "/index.html" }]
+}

@@ -1,0 +1,33 @@
+Insignias de certificacion del equipo (29)
+==========================================
+Mientras no existan, el sitio muestra un placeholder con el nombre esperado.
+
+acronis-associate-cybersecurity-tech.webp
+acronis-fundamentals-tech.webp
+acronis-associate-backup-and-recovery-tech.webp
+acronis-professional-security-awareness-training-cloud-sales.webp
+acronis-fundamentals-cloud-sales.webp
+acronis-fundamentals-cloud-tech.webp
+fortinet-certified-associate-cybersecurity.webp
+fortinet-certified-fundamentals-cybersecurity.webp
+huawei-hcsp-field.webp
+huawei-hcia-digital-power.webp
+aws-cloud-practitioner.webp
+aws-solutions-architect-associate.webp
+microsoft-azure-administrator-associate.webp
+microsoft-azure-solutions-architect-expert.webp
+hpe-hpe-sales-hybrid-cloud-solutions-2023.webp
+hpe-hpe-atp-hybrid-cloud.webp
+hpe-workload-solution-hpe-greenlake.webp
+hpe-services-partner-silver.webp
+hpe-services-partner-hpe-pointnext-services-silver.webp
+hpe-solution-provider-silver.webp
+aruba-solution-provider-silver-partner.webp
+vmware-certified-professional-data-center-virtualization-2022.webp
+vmware-certified-professional-data-center-virtualization-2022-segunda-insignia.webp
+veeam-certified-engineer-v9.webp
+veeam-certified-engineer-2020.webp
+veeam-cloud-y-service-provider-registered.webp
+paessler-partner-silver.webp
+cisco-networking-academy-introduction-to-cybersecurity.webp
+cisco-cisco-qualified-series-700-completed.webp

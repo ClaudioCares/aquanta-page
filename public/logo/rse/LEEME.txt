@@ -1,0 +1,8 @@
+Logos de responsabilidad social
+===============================
+Mientras no existan, el sitio muestra un placeholder con el nombre esperado.
+
+colegiosenchile-cl.png   (Colegiosenchile.cl)
+greenpeace.png   (Greenpeace)
+codeff.png   (CODEFF)
+rescatemos-juan-fernandez.png   (Rescatemos Juan Fernández)

@@ -1,0 +1,7 @@
+Videos de encabezado. Formato MP4 (H.264), 1080p o 720p, sin audio, 8 a 24 s en bucle, idealmente menos de 9 MB.
+Los actuales son clips de Pexels (ver CREDITOS.txt); se pueden reemplazar por material propio usando el mismo nombre de archivo.
+Donde se conectan (campo `video` del contenido; si se deja vacio vuelve la imagen con zoom lento):
+  - Portada:              src/data/content/home.js       -> hero.video
+  - Energia (hero):       src/data/content/energia.js    -> hero.video
+  - Lineas de Energia:    src/data/content/energia.js    -> tabs[n].intro.video (salas-modulares, bess, ups)
+  - Resto de paginas:     hero.video en cada archivo de src/data/content/ (servicios.mp4 va en pages/Servicios.jsx)

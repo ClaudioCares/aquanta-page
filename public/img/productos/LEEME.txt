@@ -1,0 +1,3 @@
+Fotos de productos del catalogo de Energia (src/data/content/catalogo.js)
+Origen: itelogic.com, descargadas en Descargas/imagnes para pagina/cosas itelogic
+Nombre: <slug del producto>.webp

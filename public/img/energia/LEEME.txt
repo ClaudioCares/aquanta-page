@@ -1,0 +1,4 @@
+Banners de equipos usados en las pestañas de Energia (origen: itelogic.com)
+s10.webp  Pestaña BESS y data center (inversor + contenedor Huawei)
+s2.webp   Pestaña Sigenergy (SigenStack)
+Los demas (s1-2, s3-1, s4, s5, s6-2, s8-2, s9-3, s12, s13, s14, s15) quedan disponibles

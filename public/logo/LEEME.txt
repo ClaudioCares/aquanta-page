@@ -1,0 +1,7 @@
+Logos de marca AQuanta
+======================
+logo.png               LOGO BLANCO (recortado), se usa en header y footer
+logo-color.png         cropped-AQuanta-Logo-1024x391 (version a color)
+isologo.png            Isologo
+club-de-ingenieros.png Logo del Club de Ingenieros (hero de /club-de-ingenieros)
+Origen: OneDrive\01. PROYECTOS\00. Aquanta\01. Logo y Descargas\imagnes para pagina\clubignenieros

@@ -1,0 +1,19 @@
+Imagenes de las paginas (las actuales son de relleno, dicen REEMPLAZAR)
+=======================================================================
+Mientras no existan, el sitio muestra un placeholder con el nombre esperado.
+
+hero-intro.jpg        Hero de Inicio y de /servicios
+hero-datacenter.jpg   Hero Data Center
+esc-telecom.jpg       Hero Ciberseguridad
+hero-solar.jpg        Hero Energia
+sol-dc.jpg            Hero Cloud
+hero-ups.jpg          Hero Servicios Profesionales
+mission.jpg           Hero Nosotros
+case-2.jpg            Hero Certificaciones
+esc-ci.jpg            Hero Trabaja con nosotros
+case-1.jpg            Hero Club de Ingenieros
+sol-electrica.jpg     Energia, pestaña Salas modulares (foto de sala modular)
+sol-bess.jpg          Energia, pestaña BESS (equipos Huawei/Sigenergy)
+sol-ups.jpg           Energia, pestaña Sigenergy
+news-1..4.jpg         Cloud, 4 tarjetas de archiving
+metodologia-1..5.jpg  Servicios Profesionales, 5 pasos de metodologia (ilustraciones entregadas por AQuanta, 2026-11-11)

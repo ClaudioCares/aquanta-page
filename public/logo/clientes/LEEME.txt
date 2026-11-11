@@ -1,0 +1,26 @@
+Logos de clientes. CONFIRMAR permiso para publicarlos
+=====================================================
+Mientras no existan, el sitio muestra un placeholder con el nombre esperado.
+
+lun.png   (LUN)
+hospital-dipreca.png   (Hospital Dipreca)
+hospital-del-profesor.png   (Hospital del Profesor)
+falp.png   (FALP)
+cochilco.png   (Cochilco)
+canal-13.png   (Canal 13)
+chv.png   (CHV)
+ccu.png   (CCU)
+cmpc.png   (CMPC)
+vestas.png   (Vestas)
+tecnovoa.png   (Tecnovoa)
+ncg.png   (NCG)
+autopista.png   (Autopista)
+iconstruye.png   (Iconstruye)
+sovos.png   (Sovos)
+stg.png   (STG)
+sag.png   (SAG)
+puc.png   (PUC)
+ptla.png   (PTLA)
+mutual.png   (Mutual)
+minvu.png   (Minvu)
+mega.png   (Mega)
