@@ -194,6 +194,7 @@ export const energia = {
       catalogo: '',
       anchors: [
         { label: 'Alcance', to: '#tableros-alcance' },
+        { label: 'Visualizador 3D', to: '#tableros-3d' },
         { label: 'Fabricación propia', to: '#tableros-fabricacion' },
       ],
       intro: {
@@ -215,6 +216,18 @@ export const energia = {
             { titulo: 'Redes eléctricas', icon: 'plug', texto: 'Instalación y mantención de redes eléctricas.' },
             { titulo: 'Mallas a tierra', icon: 'layers', texto: 'Construcción de mallas a tierra.' },
             { titulo: 'Tableros certificados', icon: 'grid', texto: 'Implementación de tableros eléctricos certificados.' },
+          ],
+        },
+        {
+          id: 'tableros-3d',
+          eyebrow: 'VISUALIZADOR 3D',
+          title: 'Recorre nuestros tableros en 3D',
+          lead: 'Modelos de ingeniería de tableros diseñados por AQuanta. Gíralos, acércate y revisa la distribución interna.',
+          type: 'model3d',
+          // Archivos en public/models (exportados desde el diseño 3D). CONFIRMAR nombres visibles y permiso del cliente para publicar cada modelo
+          models: [
+            { key: 'tta', label: 'Tablero de transferencia automática (TTA)', src: '/models/tablero-tta.glb?v=4' },
+            { key: 'rpp', label: 'Tablero RPP · Siemens', src: '/models/tablero-rpp-siemens.glb?v=2' },
           ],
         },
         {

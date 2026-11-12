@@ -8,6 +8,7 @@ import Icon from '../../components/ui/Icon.jsx'
 import SmartLink from '../../components/ui/SmartLink.jsx'
 import MiniForm from '../../components/forms/MiniForm.jsx'
 import YouTubeLoop from '../../components/ui/YouTubeLoop.jsx'
+import ModelViewer3D from '../../components/ui/ModelViewer3D.jsx'
 import Typewriter from '../../components/sections/Typewriter.jsx'
 import { PageHero, SectionHead, CardGrid, Steps, Accordion, Compare, LogoWall, Team, ClosingCta } from '../../components/sections/index.jsx'
 import { scrollToTarget } from '../../hooks/useSmoothScroll.js'
@@ -47,6 +48,8 @@ function Block({ b }) {
       return (<><BlockHead b={b} /><Compare items={b.items} /></>)
     case 'faq':
       return (<><BlockHead b={b} /><Accordion items={b.items} /></>)
+    case 'model3d':
+      return (<><SectionHead eyebrow={b.eyebrow} title={b.title} lead={b.lead} /><ModelViewer3D models={b.models} /></>)
     case 'typewriter':
       return (
         <BlockHead b={b}>
