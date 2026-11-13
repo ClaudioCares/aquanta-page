@@ -234,6 +234,8 @@ const jobs = [
   [MODELOS, 'TG - OPEN MACUL.glb', 'tablero-general.glb', (g, glb) => optimize(glb, { label: 'TG', budget: 1_500_000 })],
   // Sala con filas de equipos (SimLab): 62 M de triángulos en origen por las piezas repetidas
   [MODELOS, 'GTD SALAS.glb', 'sala-equipos.glb', (g, glb) => { flattenSheared(g, 'Sala equipos'); optimize(glb, { label: 'Sala equipos', budget: 2_500_000 }) }],
+  // Sala eléctrica de una planta de 3,5 MVA (SimLab): viene limpia, solo se compacta
+  [MODELOS, 'SALA ELECTRICA bess.glb', 'sala-electrica-3-5-mva.glb', (g, glb) => { flattenSheared(g, 'Sala 3,5 MVA'); optimize(glb, { label: 'Sala 3,5 MVA', budget: 1_500_000 }) }],
 ]
 const only = process.argv[3] // opcional: procesar solo los destinos que contengan este texto
 await ready

@@ -308,6 +308,7 @@ export const energia = {
           // Archivo en public/models (exportado desde SketchUp). CONFIRMAR nombre visible y permiso para publicar el modelo
           models: [
             { key: 'sala', label: 'Sala eléctrica modular', src: '/models/sala-electrica.glb?v=5', orbit: '25deg 72deg 105%' },
+            { key: 'sala-3-5-mva', label: 'Sala eléctrica de respaldo de energía 3,5 MVA', src: '/models/sala-electrica-3-5-mva.glb?v=1', orbit: '25deg 68deg 105%' },
             { key: 'sala-equipos', label: 'Sala de racks', src: '/models/sala-equipos.glb?v=1', orbit: '20deg 84deg 95%' },
           ],
         },
