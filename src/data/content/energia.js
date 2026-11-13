@@ -228,6 +228,8 @@ export const energia = {
           models: [
             { key: 'tta', label: 'Tablero de transferencia automática (TTA)', src: '/models/tablero-tta.glb?v=4' },
             { key: 'rpp', label: 'Tablero RPP · Siemens', src: '/models/tablero-rpp-siemens.glb?v=2' },
+            { key: 'orion', label: 'Tablero Orion 250', src: '/models/tablero-orion-250.glb?v=5' },
+            { key: 'tg', label: 'Tablero general (TG)', src: '/models/tablero-general.glb?v=1' },
           ],
         },
         {
@@ -263,6 +265,7 @@ export const energia = {
       catalogo: 'dc-modular',
       anchors: [
         { label: 'El activo', to: '#activo' },
+        { label: 'Visualizador 3D', to: '#salas-3d' },
         { label: 'Integración en fábrica', to: '#fabrica' },
         { label: 'La ejecución', to: '#ejecucion' },
         { label: 'Data center modular', to: '#dc-modular' },
@@ -294,6 +297,18 @@ export const energia = {
             { titulo: 'Plazo en paralelo', icon: 'clock', texto: 'La fabricación y la obra civil avanzan al mismo tiempo, comprimiendo el programa.' },
             { titulo: 'Menos HH en faena', icon: 'users', texto: 'En terreno solo queda izaje, conexión de fuerza y puesta en servicio.' },
             { titulo: 'Resistencia al fuego', icon: 'flame', texto: 'RF120 verificable, ejecutado y documentado en taller, no improvisado en terreno.' },
+          ],
+        },
+        {
+          id: 'salas-3d',
+          eyebrow: 'VISUALIZADOR 3D',
+          title: 'Recorre nuestras salas en 3D',
+          lead: 'Modelos de ingeniería de salas proyectadas por AQuanta. Gíralas y acércate para revisar la envolvente y la distribución de los equipos.',
+          type: 'model3d',
+          // Archivo en public/models (exportado desde SketchUp). CONFIRMAR nombre visible y permiso para publicar el modelo
+          models: [
+            { key: 'sala', label: 'Sala eléctrica modular', src: '/models/sala-electrica.glb?v=5', orbit: '25deg 72deg 105%' },
+            { key: 'sala-equipos', label: 'Sala de racks', src: '/models/sala-equipos.glb?v=1', orbit: '20deg 84deg 95%' },
           ],
         },
         {
@@ -372,6 +387,7 @@ export const energia = {
       catalogo: '',
       anchors: [
         { label: 'Beneficios', to: '#ev-beneficios' },
+        { label: 'Visualizador 3D', to: '#ev-3d' },
         { label: 'Arquitectura', to: '#ev-arquitectura' },
         { label: 'Integración', to: '#ev-integracion' },
       ],
@@ -393,6 +409,17 @@ export const energia = {
             { titulo: 'Silencioso', icon: 'target', texto: 'Menos de 55 dB(A) durante la carga, apto para estacionamientos, centros comerciales y zonas residenciales.' },
             { titulo: '10 años de vida útil', icon: 'award', texto: 'Diseñado para operar de forma confiable durante diez años, con menos mantenimiento que los cargadores enfriados por aire.' },
             { titulo: '96 % de eficiencia', icon: 'chart', texto: 'La matriz de energía compartida reparte la potencia entre postes, ahorra capacidad de empalme y eleva la eficiencia de recarga al 96 %.' },
+          ],
+        },
+        {
+          id: 'ev-3d',
+          eyebrow: 'VISUALIZADOR 3D',
+          title: 'Recorre el NexVoltHub en 3D',
+          lead: 'Modelo de ingeniería de una estación de carga integrada por AQuanta. Gírala, acércate y revisa cómo se distribuyen los equipos.',
+          type: 'model3d',
+          // Archivo en public/models (exportado desde SketchUp y aligerado con scripts/fix-models.mjs). CONFIRMAR nombre visible y permiso para publicar el modelo
+          models: [
+            { key: 'nexvolthub', label: 'NexVoltHub', src: '/models/nexvolthub.glb?v=1' },
           ],
         },
         {

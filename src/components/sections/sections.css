@@ -73,10 +73,11 @@
 .card__data small { display: block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); font-family: var(--mono); }
 .card__data strong { font-size: 14px; font-weight: 500; }
 .card__hl { display: inline-block; margin-top: 4px; padding: 6px 12px; border-radius: 999px; font-family: var(--mono); font-size: 11px; color: var(--accent); background: rgba(var(--accent-rgb), 0.1); border: 1px solid rgba(var(--accent-rgb), 0.25); align-self: flex-start; }
-.card__img { width: calc(100% + 48px); margin: -28px -24px 10px; aspect-ratio: 16 / 9; object-fit: cover; }
+.card__img { width: calc(100% + 40px); max-width: none; margin: -22px -20px 10px; aspect-ratio: 16 / 9; object-fit: cover; }
 .card__img.img-ph { height: auto; }
 .cards--glass { gap: 16px; background: none; border: 0; border-radius: 0; overflow: visible; }
-.cards--glass .card { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: var(--radius); }
+.cards--glass .card { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.cards--glass .card__img { aspect-ratio: 4 / 3; }
 .cards--glass .card:hover { background: rgba(255, 255, 255, 0.08); }
 @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .cards { grid-template-columns: 1fr; } .card { min-height: 0; } }
@@ -137,6 +138,23 @@
 .logowall__tile .img-ph { background: none; border: 0; min-height: 0; padding: 0; }
 .logowall__name { font-size: 13px; font-weight: 600; color: #2b3038; letter-spacing: 0.02em; text-align: center; }
 .logowall--sm .logowall__tile { height: 76px; }
+/* Grilla de clientes: retícula de líneas con foco de luz que sigue al cursor */
+.cgrid { --mx: -400px; --my: -400px; position: relative; display: grid; grid-template-columns: repeat(var(--cols, 6), 1fr); gap: 1px; padding: 1px; border-radius: var(--radius-lg); overflow: hidden; background: radial-gradient(260px circle at var(--mx) var(--my), rgba(var(--accent-rgb), 0.9), transparent 70%), var(--line); }
+.cgrid__cell { position: relative; display: grid; place-items: center; height: 112px; padding: 22px 26px; background: var(--bg); transition: background 0.3s var(--ease); }
+.cgrid__cell::before { content: ''; position: absolute; inset: 0; background: radial-gradient(220px circle at 50% 120%, rgba(var(--accent-rgb), 0.14), transparent 70%); opacity: 0; transition: opacity 0.3s var(--ease); }
+.cgrid__mono, .cgrid__color { grid-area: 1 / 1; position: relative; max-height: 44px; max-width: 100%; width: auto; object-fit: contain; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease); }
+.cgrid__mono { opacity: 0.55; }
+.cgrid__color { opacity: 0; padding: 6px 10px; box-sizing: content-box; border-radius: 10px; background: #ffffff; transform: scale(0.94); }
+.cgrid__ph { grid-area: 1 / 1; position: relative; background: none; border: 0; min-height: 0; padding: 0; }
+.cgrid__name { font-size: 15px; font-weight: 600; letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.6); text-align: center; transition: color 0.3s var(--ease); }
+.cgrid__cell:not(.cgrid__cell--blank):hover { background: #171a1f; }
+.cgrid__cell:not(.cgrid__cell--blank):hover::before { opacity: 1; }
+.cgrid__cell:hover .cgrid__mono { opacity: 0; }
+.cgrid__cell:hover .cgrid__color { opacity: 1; transform: scale(1); }
+.cgrid__cell:hover .cgrid__name { color: var(--accent); }
+@media (max-width: 1000px) { .cgrid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 1000px) { .cgrid__cell--blank { display: none; } }
+@media (max-width: 600px) { .cgrid { grid-template-columns: repeat(2, 1fr); } .cgrid__cell { height: 88px; padding: 16px 18px; } .cgrid__mono, .cgrid__color { max-height: 34px; } }
 
 /* ---------- Equipo ---------- */
 .team__group + .team__group { margin-top: 44px; }
@@ -211,6 +229,24 @@
 /* ---------- Oficinas ---------- */
 .offices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .office { padding: 26px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+.office.is-active { border-color: rgba(var(--accent-rgb), 0.55); background: var(--surface-2); }
+.office { transition: border-color 0.3s var(--ease), background 0.3s var(--ease); }
+/* Mapamundi de puntos con las oficinas */
+.wmap { position: relative; margin: 0 auto clamp(28px, 4vw, 48px); max-width: 1000px; }
+.wmap svg { display: block; width: 100%; height: auto; }
+.wmap__land { fill: rgba(255, 255, 255, 0.24); }
+.wmap__ours { fill: rgba(var(--accent-rgb), 0.75); }
+.wmap__pin { position: absolute; width: 0; height: 0; padding: 0; border: 0; background: none; cursor: pointer; font: inherit; color: inherit; }
+.wmap__dot { position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(12, 14, 17, 0.9), 0 0 18px rgba(var(--accent-rgb), 0.9); transition: transform 0.25s var(--ease); }
+.wmap__pulse { position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--accent); animation: wmap-pulse 2.4s ease-out infinite; }
+.wmap__pin:nth-of-type(2) .wmap__pulse { animation-delay: 0.8s; }
+.wmap__pin:nth-of-type(3) .wmap__pulse { animation-delay: 1.6s; }
+.wmap__label { position: absolute; right: 18px; top: -11px; white-space: nowrap; padding: 3px 10px; border-radius: 999px; font-size: 12px; background: rgba(12, 14, 17, 0.85); border: 1px solid var(--line); color: var(--text); transition: border-color 0.25s var(--ease), color 0.25s var(--ease); }
+.wmap__pin.is-active .wmap__dot, .wmap__pin:hover .wmap__dot { transform: scale(1.45); }
+.wmap__pin.is-active .wmap__label, .wmap__pin:hover .wmap__label { border-color: var(--accent); color: var(--accent); }
+@keyframes wmap-pulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(4.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .wmap__pulse { animation: none; opacity: 0; } }
+@media (max-width: 700px) { .wmap__dot, .wmap__pulse { left: -4px; top: -4px; width: 8px; height: 8px; } .wmap__label { right: 10px; top: -8px; font-size: 9.5px; padding: 1px 6px; } }
 .office__country { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 500; }
 .office__country svg { color: var(--accent); }
 .office__company { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; color: var(--dim); }

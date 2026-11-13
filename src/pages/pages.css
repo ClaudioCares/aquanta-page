@@ -62,7 +62,7 @@
 .m3d__tab { padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: inherit; font-size: 13.5px; cursor: pointer; transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease); }
 .m3d__tab:hover { color: var(--text); border-color: rgba(var(--accent-rgb), 0.5); }
 .m3d__tab.is-active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 500; }
-.m3d__stage { position: relative; height: clamp(360px, 62vh, 640px); border-radius: var(--radius-lg); overflow: hidden; background: radial-gradient(120% 90% at 50% 20%, #f4f6f9 0%, #cfd6df 100%); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.m3d__stage { position: relative; height: clamp(360px, 62vh, 640px); border-radius: var(--radius-lg); overflow: hidden; background: radial-gradient(120% 90% at 50% 25%, #4a525e 0%, #1c2026 100%); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08); }
 .m3d__stage model-viewer { width: 100%; height: 100%; display: block; background: transparent; --poster-color: transparent; --progress-bar-color: transparent; }
 .m3d__start { position: absolute; inset: 0; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 0; background: transparent; color: #131519; font: inherit; cursor: pointer; }
 .m3d__start img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
@@ -71,10 +71,10 @@
 .m3d__start:hover .m3d__start-icon { transform: scale(1.08); }
 .m3d__start-label { font-size: 17px; font-weight: 600; }
 .m3d__start-sub { font-size: 13px; color: rgba(19, 21, 25, 0.65); }
-.m3d__loading { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); width: min(280px, 70%); display: flex; flex-direction: column; gap: 8px; align-items: center; color: #131519; font-size: 12px; pointer-events: none; }
-.m3d__bar { width: 100%; height: 4px; border-radius: 4px; background: rgba(19, 21, 25, 0.15); overflow: hidden; }
-.m3d__bar i { display: block; height: 100%; background: #131519; transition: width 0.2s linear; }
-.m3d__error { position: absolute; left: 0; right: 0; bottom: 22px; text-align: center; color: #8a1c1c; font-size: 14px; padding: 0 16px; }
+.m3d__loading { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); width: min(280px, 70%); display: flex; flex-direction: column; gap: 8px; align-items: center; color: var(--text); font-size: 12px; pointer-events: none; }
+.m3d__bar { width: 100%; height: 4px; border-radius: 4px; background: rgba(255, 255, 255, 0.18); overflow: hidden; }
+.m3d__bar i { display: block; height: 100%; background: var(--accent); transition: width 0.2s linear; }
+.m3d__error { position: absolute; left: 0; right: 0; bottom: 22px; text-align: center; color: #ff9a9a; font-size: 14px; padding: 0 16px; }
 .m3d__hint { color: var(--dim); font-size: 11.5px; text-align: center; }
 @media (max-width: 600px) { .m3d__stage { height: 420px; border-radius: 14px; } }
 

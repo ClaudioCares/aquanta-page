@@ -5,6 +5,7 @@ import Img from '../ui/Img.jsx'
 import SmartLink from '../ui/SmartLink.jsx'
 import PillButton from '../ui/PillButton.jsx'
 import slug from '../../utils/slug.js'
+import WorldMap from './WorldMap.jsx'
 import './sections.css'
 
 /* ---------- Encabezado de sección (etiqueta + título + bajada) ---------- */
@@ -182,6 +183,32 @@ export function LogoWall({ items = [], folder = 'marcas', small = false }) {
   )
 }
 
+/* ---------- Grilla de clientes ----------
+   Retícula de líneas finas con los logos en blanco. Un foco de luz sigue al cursor por las líneas
+   y la celda bajo el mouse muestra el logo original a color.
+   Los logos en blanco se generan con scripts/build-client-logos.mjs (carpeta mono/). */
+export function ClientGrid({ items = [], folder = 'clientes' }) {
+  const move = (e) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
+    e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
+  }
+  // columnas: la cantidad que deja filas completas; si ninguna calza, 6 y se rellena la última fila con celdas vacías
+  const cols = [6, 7, 5].find((c) => items.length % c === 0) || 6
+  const blanks = (cols - (items.length % cols)) % cols
+  return (
+    <div className="cgrid" style={{ '--cols': cols }} onMouseMove={move} data-reveal>
+      {items.map((name) => (
+        <div key={name} className="cgrid__cell" title={name}>
+          <Img src={`/logo/${folder}/mono/${slug(name)}.webp`} alt={name} className="cgrid__mono" phClassName="cgrid__ph" fallback={<span className="cgrid__name">{name}</span>} loading="lazy" />
+          <img src={`/logo/${folder}/${slug(name)}.${logoExt[name] || 'png'}`} alt="" className="cgrid__color" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+        </div>
+      ))}
+      {Array.from({ length: blanks }, (_, i) => <div key={`blank-${i}`} className="cgrid__cell cgrid__cell--blank" aria-hidden="true" />)}
+    </div>
+  )
+}
+
 /* ---------- Equipo (ver Team.jsx: recortes sin fondo o lista de datos) ---------- */
 export { default as Team, Lineup, Roster } from './Team.jsx'
 
@@ -213,13 +240,16 @@ export function ClosingCta({ data = closingCta }) {
 
 /* ---------- 2.4 Oficinas ---------- */
 export function Offices({ data = officesData, deep = false }) {
+  // país resaltado: el mapa y las tarjetas se iluminan juntos al pasar el mouse
+  const [active, setActive] = useState(null)
   return (
     <section className={`section ${deep ? 'section--deep' : ''}`} id="oficinas">
       <div className="container">
         <SectionHead title={data.title} lead={data.text} />
+        <WorldMap points={data.items.filter((o) => o.geo).map((o) => ({ key: o.country, label: `${o.city}, ${o.country}`, geo: o.geo }))} active={active} onActive={setActive} />
         <div className="offices">
           {data.items.map((o, i) => (
-            <article key={o.country} className="office" data-reveal={i + 1}>
+            <article key={o.country} className={`office ${active === o.country ? 'is-active' : ''}`} data-reveal={i + 1} onMouseEnter={() => setActive(o.country)} onMouseLeave={() => setActive(null)}>
               <h3 className="office__country"><Icon name="pin" size={18} /> {o.country}</h3>
               <span className="office__company">{o.company}</span>
               <p>{o.address}</p>

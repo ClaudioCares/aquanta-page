@@ -4,7 +4,7 @@ import Icon from '../components/ui/Icon.jsx'
 import SmartLink from '../components/ui/SmartLink.jsx'
 import Hero from '../components/home/Hero.jsx'
 import ContactForm from '../components/forms/ContactForm.jsx'
-import { SectionHead, Seals, Steps, CardGrid, LogoWall, Offices } from '../components/sections/index.jsx'
+import { SectionHead, Seals, Steps, CardGrid, LogoWall, ClientGrid, Offices } from '../components/sections/index.jsx'
 import '../components/home/home.css'
 
 /* 3. INICIO: hero, certificaciones, metodología, portafolio, marcas, clientes, hablemos, oficinas */
@@ -56,8 +56,8 @@ export default function Home() {
       {/* 3.6 Clientes. CONFIRMAR: permiso para publicar estos logos */}
       <section className="section section--tight">
         <div className="container">
-          <SectionHead title={clients.title} />
-          <LogoWall items={clients.items} folder="clientes" small />
+          <SectionHead eyebrow={clients.eyebrow} title={clients.title} lead={clients.lead} />
+          <ClientGrid items={clients.items} folder="clientes" />
         </div>
       </section>
 

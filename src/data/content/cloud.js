@@ -44,12 +44,12 @@ export const cloud = {
   archiving: {
     eyebrow: 'ARCHIVING',
     title: 'Archiving y resguardo: el valor de tu información',
-    // TODO: reemplazar fotos por imágenes reales de archiving
+    // Imágenes de la página original, entregadas por AQuanta (scripts/import-images.mjs)
     items: [
-      { titulo: 'El riesgo operativo', img: '/img/news-1.jpg', texto: '"¡Llevaba 3 horas trabajando en ese archivo y no lo encuentro!". En una era digital, perder un reporte no guardado o extraviar documentos recientes es una falla común que golpea directo la productividad de los equipos.' },
-      { titulo: 'Fallas críticas de hardware', img: '/img/news-2.jpg', texto: '¿Qué pasa si un disco duro falla y se pierden 4 años de trabajo? El problema crece cuando la falla ocurre en el servidor principal de la empresa, comprometiendo bases de datos y la operación completa.' },
-      { titulo: 'Continuidad del negocio', img: '/img/news-3.jpg', texto: 'Ningún medio es infalible, por nuevo o avanzado que sea. No poder recuperar la información de clientes, contabilidad o proyectos ha hecho desaparecer empresas enteras ante eventos inesperados.' },
-      { titulo: 'Archiving inteligente', img: '/img/news-4.jpg', texto: 'Implementamos herramientas, procesos y buenos hábitos de almacenamiento y respaldo para que tu información histórica y crítica esté archivada de forma segura, inmutable y siempre disponible.' },
+      { titulo: 'El riesgo operativo', img: '/img/cloud/archiving-riesgo.webp', texto: '"¡Llevaba 3 horas trabajando en ese archivo y no lo encuentro!". En una era digital, perder un reporte no guardado o extraviar documentos recientes es una falla común que golpea directo la productividad de los equipos.' },
+      { titulo: 'Fallas críticas de hardware', img: '/img/cloud/archiving-hardware.webp', texto: '¿Qué pasa si un disco duro falla y se pierden 4 años de trabajo? El problema crece cuando la falla ocurre en el servidor principal de la empresa, comprometiendo bases de datos y la operación completa.' },
+      { titulo: 'Continuidad del negocio', img: '/img/cloud/archiving-continuidad.webp', texto: 'Ningún medio es infalible, por nuevo o avanzado que sea. No poder recuperar la información de clientes, contabilidad o proyectos ha hecho desaparecer empresas enteras ante eventos inesperados.' },
+      { titulo: 'Archiving inteligente', img: '/img/cloud/archiving-inteligente.webp', texto: 'Implementamos herramientas, procesos y buenos hábitos de almacenamiento y respaldo para que tu información histórica y crítica esté archivada de forma segura, inmutable y siempre disponible.' },
     ],
   },
 }

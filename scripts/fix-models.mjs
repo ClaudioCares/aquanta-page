@@ -1,9 +1,12 @@
 // Limpia los .glb exportados desde SimLab antes de publicarlos en public/models:
 //  - RPP Siemens: quita los pernos sueltos y la barra de cobre que quedaron fuera del gabinete.
 //  - TTA: fija en la geometría la puerta exterior, que SimLab exporta con una matriz deformada (se veía torcida).
-// Uso: node scripts/fix-models.mjs "<carpeta con los .glb originales>"
+//  - Orion y Sala (SketchUp): aíslan el objeto principal de la escena y activan el sombreado.
+//  - Electrohub (SketchUp): además se aligera (ver optimize-glb.mjs), porque el original pesa 262 MB.
+// Uso: node scripts/fix-models.mjs "<carpeta Descargas con los .glb originales>" [filtro de destino]
 import fs from 'node:fs'
 import path from 'node:path'
+import { optimize, ready } from './optimize-glb.mjs'
 
 const SRC = process.argv[2]
 const OUT = path.resolve('public/models')
@@ -168,13 +171,76 @@ function fixTta(g, glb) {
   g.nodes[asm].children = g.nodes[asm].children.filter((c) => c !== door).concat(added)
 }
 
+/* ---------- Modelos exportados desde SketchUp (OpenSKP) ---------- */
+// La escena de SketchUp trae el objeto principal junto a copias, piezas sueltas y líneas sin agrupar.
+// Se conserva solo lo que cae dentro de la zona indicada (x/z en metros) y los materiales pasan de
+// "unlit" (planos, todo se ve blanco) a materiales con sombreado.
+function fixSketchup(g, { label, x, z }) {
+  const info = index(g)
+  const root = g.scenes[g.scene || 0].nodes[0]
+  delete g.nodes[root].mesh // caras sueltas dibujadas fuera de todo grupo
+  const kept = []
+  let removed = 0
+  for (const c of g.nodes[root].children || []) {
+    const { mn, mx, biggest } = bounds(g, info, c)
+    const cx = (mn[0] + mx[0]) / 2, cz = (mn[2] + mx[2]) / 2
+    const inside = biggest && cx >= x[0] && cx <= x[1] && cz >= z[0] && cz <= z[1] && !/loose edges/i.test(g.nodes[c].name || '')
+    if (inside) kept.push(c); else removed++
+  }
+  g.nodes[root].children = kept
+  for (const m of g.materials || []) {
+    if (m.extensions) { delete m.extensions.KHR_materials_unlit; if (!Object.keys(m.extensions).length) delete m.extensions }
+    m.pbrMetallicRoughness = { ...(m.pbrMetallicRoughness || {}), metallicFactor: 0, roughnessFactor: 0.75 }
+    m.doubleSided = true // SketchUp no garantiza la orientación de las caras
+    // el blanco por defecto de SketchUp se quema con la luz del visor: se baja a gris claro
+    const c = m.pbrMetallicRoughness.baseColorFactor || [1, 1, 1, 1]
+    if (!m.pbrMetallicRoughness.baseColorTexture && Math.min(c[0], c[1], c[2]) > 0.9) m.pbrMetallicRoughness.baseColorFactor = [0.62, 0.64, 0.66, c[3] ?? 1]
+  }
+  for (const k of ['extensionsUsed', 'extensionsRequired']) if (g[k]) { g[k] = g[k].filter((e) => e !== 'KHR_materials_unlit'); if (!g[k].length) delete g[k] }
+  console.log(`${label}: ${kept.length} conjuntos conservados, ${removed} fuera de la zona quitados`)
+}
+
+/* ---------- Modelos de SimLab: nodos con matriz deformada ---------- */
+// Algunos subconjuntos traen una matriz con sesgo que los visores descomponen mal (las piezas hijas
+// quedarían corridas). Cada pieza de esos subconjuntos se cuelga de la raíz con su matriz final exacta.
+function flattenSheared(g, label) {
+  const info = index(g)
+  const shear = (m) => { const c = [0, 1, 2].map((q) => [m[q * 4], m[q * 4 + 1], m[q * 4 + 2]]), L = c.map((v) => Math.hypot(...v)); let s = 0
+    for (const [a, b] of [[0, 1], [0, 2], [1, 2]]) s = Math.max(s, Math.abs(c[a][0] * c[b][0] + c[a][1] * c[b][1] + c[a][2] * c[b][2]) / (L[a] * L[b] || 1)); return s }
+  const roots = g.scenes[g.scene || 0].nodes
+  let moved = 0, groups = 0
+  const lift = (i) => { const n = g.nodes[i]
+    if (n.mesh !== undefined) { const w = info.get(i).world; if (shear(w) > 0.02) throw new Error(label + ': pieza con deformación real, requiere fijarla en la geometría'); g.nodes.push({ name: n.name, mesh: n.mesh, matrix: w }); roots.push(g.nodes.length - 1); moved++ }
+    for (const c of n.children || []) lift(c) }
+  const walk = (i) => { const n = g.nodes[i]; if (!n.children) return
+    n.children = n.children.filter((c) => { if (shear(local(g.nodes[c])) > 0.02) { lift(c); groups++; return false } return true })
+    for (const c of n.children) walk(c) }
+  for (const r of [...roots]) walk(r)
+  console.log(`${label}: ${groups} subconjuntos con matriz deformada corregidos (${moved} piezas)`)
+}
+
 /* ---------- ejecutar ---------- */
+const MODELOS = path.join(SRC, 'imagnes para pagina', 'MODELOS')
 const jobs = [
-  ['326 - AQANTA - TTA MANTOS VERDES.glb', 'tablero-tta.glb', fixTta],
-  ['INGENEO - RPP - 3D SIEMENS 1.glb', 'tablero-rpp-siemens.glb', fixRpp],
+  [SRC, '326 - AQANTA - TTA MANTOS VERDES.glb', 'tablero-tta.glb', fixTta],
+  [SRC, 'INGENEO - RPP - 3D SIEMENS 1.glb', 'tablero-rpp-siemens.glb', fixRpp],
+  // Orion: la escena trae dos copias del tablero; se publica la abierta (x 3..5), que muestra el interior
+  [MODELOS, 'TABLERO_ORION_250.glb', 'tablero-orion-250.glb', (g, glb) => { fixSketchup(g, { label: 'Orion', x: [2, 6], z: [-4, 1] }); optimize(glb, { label: 'Orion', budget: 1_200_000 }) }],
+  // Sala: el resto de la escena son piezas de repuesto y contenedores lejos de la sala
+  [MODELOS, 'SALA_ELECTRICA_3.5.glb', 'sala-electrica.glb', (g, glb) => { fixSketchup(g, { label: 'Sala', x: [-5, 21.5], z: [-50.5, -43.5] }); optimize(glb, { label: 'Sala', budget: 1_200_000 }) }],
+  // Electrohub: 262 MB y 23 M de triángulos en origen; se quita la figura de escala y se aligera para la web
+  [MODELOS, 'ELECTROHUB.glb', 'nexvolthub.glb', (g, glb) => { fixSketchup(g, { label: 'NexVoltHub', x: [-0.1, 8], z: [-4, 4] }); optimize(glb, { label: 'NexVoltHub', budget: 2_000_000 }) }],
+  // Tablero general (SimLab): viene limpio, solo se aligera
+  [MODELOS, 'TG - OPEN MACUL.glb', 'tablero-general.glb', (g, glb) => optimize(glb, { label: 'TG', budget: 1_500_000 })],
+  // Sala con filas de equipos (SimLab): 62 M de triángulos en origen por las piezas repetidas
+  [MODELOS, 'GTD SALAS.glb', 'sala-equipos.glb', (g, glb) => { flattenSheared(g, 'Sala equipos'); optimize(glb, { label: 'Sala equipos', budget: 2_500_000 }) }],
 ]
-for (const [src, out, fix] of jobs) {
-  const glb = readGlb(path.join(SRC, src))
+const only = process.argv[3] // opcional: procesar solo los destinos que contengan este texto
+await ready
+for (const [dir, src, out, fix] of jobs) {
+  if (only && !out.includes(only)) continue
+  if (!fs.existsSync(path.join(dir, src))) { console.log('(no encontrado, se omite) ' + src); continue }
+  const glb = readGlb(path.join(dir, src))
   fix(glb.json, glb)
   writeGlb(path.join(OUT, out), glb)
 }

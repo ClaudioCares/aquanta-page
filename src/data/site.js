@@ -87,11 +87,11 @@ export const offices = {
   title: 'Integramos tecnología con alcance regional.',
   text: 'Entregamos continuidad operativa y soluciones de vanguardia con presencia directa en Chile, Colombia y Perú.',
   items: [
-    { country: 'Chile', company: 'AQUANTA INGENIERÍA SPA', address: 'Puyehue 1324, Providencia, Santiago', phone: '+56 2 2204 0909', email: 'contacto@aquantalatam.com' },
+    { country: 'Chile', city: 'Santiago', geo: [-70.65, -33.45], company: 'AQUANTA INGENIERÍA SPA', address: 'Puyehue 1324, Providencia, Santiago', phone: '+56 2 2204 0909', email: 'contacto@aquantalatam.com' },
     // CONFIRMAR: el sitio viejo decía S.A.C para Colombia
-    { country: 'Colombia', company: 'AQUANTA TECNOLOGÍA S.A.S', address: 'Carrera 7 #75-66, oficina 501, Bogotá D.C., Colombia', phone: '', email: 'contacto@aquantalatam.com' },
+    { country: 'Colombia', city: 'Bogotá', geo: [-74.07, 4.71], company: 'AQUANTA TECNOLOGÍA S.A.S', address: 'Carrera 7 #75-66, oficina 501, Bogotá D.C., Colombia', phone: '', email: 'contacto@aquantalatam.com' },
     // CONFIRMAR: el sitio viejo decía S.A.S para Perú
-    { country: 'Perú', company: 'AQUANTA TECNOLOGÍA S.A.C', address: 'Av. Pardo y Aliaga 699, piso 8, San Isidro, Lima, Perú', phone: '', email: 'contacto@aquantalatam.com' },
+    { country: 'Perú', city: 'Lima', geo: [-77.04, -12.05], company: 'AQUANTA TECNOLOGÍA S.A.C', address: 'Av. Pardo y Aliaga 699, piso 8, San Isidro, Lima, Perú', phone: '', email: 'contacto@aquantalatam.com' },
   ],
 }
 

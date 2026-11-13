@@ -50,8 +50,11 @@ export const home = {
   },
   // CONFIRMAR: permiso para publicar estos logos
   clients: {
+    eyebrow: 'CLIENTES',
     title: 'Confían en nosotros',
-    items: ['LUN', 'Hospital Dipreca', 'Hospital del Profesor', 'FALP', 'Cochilco', 'Canal 13', 'CHV', 'CCU', 'CMPC', 'Vestas', 'Tecnovoa', 'NCG', 'Autopista', 'Iconstruye', 'Sovos', 'STG', 'SAG', 'PUC', 'PTLA', 'Mutual', 'Minvu', 'Mega'],
+    // CONFIRMAR: rubros mencionados en la bajada
+    lead: 'Organizaciones de salud, medios, minería, telecomunicaciones, industria, educación y sector público operan su infraestructura crítica con AQuanta.',
+    items: ['LUN', 'Hospital Dipreca', 'Hospital del Profesor', 'FALP', 'Cochilco', 'Canal 13', 'CHV', 'CCU', 'CMPC', 'Vestas', 'Tecnovoa', 'NCG', 'Autopista', 'Iconstruye', 'Sovos', 'STG', 'SAG', 'PUC', 'PTLA', 'Mutual', 'Minvu', 'Mega', 'Capstone Copper', 'Molymet', 'Claro Chile', 'Capredena', 'Empresas Jordan', 'UMCE'],
   },
   contact: {
     eyebrow: 'HABLEMOS',
