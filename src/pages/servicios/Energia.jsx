@@ -10,6 +10,7 @@ import MiniForm from '../../components/forms/MiniForm.jsx'
 import YouTubeLoop from '../../components/ui/YouTubeLoop.jsx'
 import ModelViewer3D from '../../components/ui/ModelViewer3D.jsx'
 import ModelBuild3D from '../../components/ui/ModelBuild3D.jsx'
+import EnergiaIntro from '../../components/ui/EnergiaIntro.jsx'
 import Typewriter from '../../components/sections/Typewriter.jsx'
 import { PageHero, SectionHead, CardGrid, Steps, Accordion, Compare, LogoWall, Team, ClosingCta } from '../../components/sections/index.jsx'
 import { scrollToTarget } from '../../hooks/useSmoothScroll.js'
@@ -83,6 +84,7 @@ export default function Energia() {
   return (
     <>
       <Seo {...d.seo} />
+      <EnergiaIntro />
       <PageHero {...d.hero} title={d.hero.h1} />
 
       {/* Selector de líneas (pestañas) */}

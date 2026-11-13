@@ -229,7 +229,7 @@
 /* ---------- Oficinas ---------- */
 .offices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .office { padding: 26px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
-.office.is-active { border-color: rgba(var(--accent-rgb), 0.55); background: var(--surface-2); }
+.office[data-active] { border-color: rgba(var(--accent-rgb), 0.55); background: var(--surface-2); }
 .office { transition: border-color 0.3s var(--ease), background 0.3s var(--ease); }
 /* Mapamundi de puntos con las oficinas */
 .wmap { position: relative; margin: 0 auto clamp(28px, 4vw, 48px); max-width: 1000px; }

@@ -10,6 +10,7 @@ export const brand = {
   tagline: 'INTEGRACIÓN SISTÉMICA DE TECNOLOGÍA',
   taglineShort: 'Integración sistémica de tecnología',
   isologo: '/logo/isologo.png',
+  logoEnergia: '/logo/logo-energia.png', // AQ-LOGO+ISO (blanco): reemplaza al logo del encabezado dentro de la línea de Energía
   logoLight: '/logo/logo.png', // LOGO BLANCO (header y footer oscuros). Si no existe se muestra isologo + texto
   logoDark: '/logo/logo-color.png', // cropped-AQuanta-Logo (versión a color para fondos claros)
   email: 'contacto@aquantalatam.com',

@@ -60,6 +60,20 @@
 .bsplit:only-child { margin-bottom: 0; }
 @media (max-width: 900px) { .bsplit { grid-template-columns: 1fr; } }
 
+/* ---------- Entrada a Energía: el logo se enciende y vuela al encabezado ---------- */
+.eintro { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; pointer-events: none; background: radial-gradient(60% 50% at 50% 50%, #1b2412 0%, var(--bg-deep) 70%); animation: eintro-bg 2.6s var(--ease) both; }
+.eintro__logo { position: relative; width: min(560px, 76vw); animation: eintro-logo 2.6s var(--ease) both; }
+.eintro__logo img { display: block; width: 100%; height: auto; clip-path: inset(0 100% 0 0); animation: eintro-reveal 0.95s var(--ease) 0.15s both; filter: drop-shadow(0 0 26px rgba(var(--accent-rgb), 0.35)); }
+.eintro__sweep { position: absolute; top: -12%; bottom: -12%; left: 0; width: 4px; border-radius: 4px; background: var(--accent); box-shadow: 0 0 28px 8px rgba(var(--accent-rgb), 0.85); animation: eintro-sweep 0.95s var(--ease) 0.15s both; }
+.eintro__line { position: absolute; left: 50%; top: calc(50% + min(96px, 13vw)); width: min(560px, 76vw); height: 2px; transform: translateX(-50%) scaleX(0); background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: eintro-line 2.6s var(--ease) both; }
+@keyframes eintro-reveal { to { clip-path: inset(0 0 0 0); } }
+@keyframes eintro-sweep { 0% { left: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+@keyframes eintro-line { 0%, 35% { transform: translateX(-50%) scaleX(0); opacity: 1; } 60% { transform: translateX(-50%) scaleX(1); opacity: 1; } 72%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0; } }
+/* el logo se queda un momento al centro y luego se achica hacia la esquina del encabezado */
+@keyframes eintro-logo { 0%, 68% { transform: none; opacity: 1; } 96% { opacity: 1; } 100% { transform: translate(calc(-50vw + 118px), calc(-50vh + 32px)) scale(0.29); opacity: 0; } }
+@keyframes eintro-bg { 0%, 66% { opacity: 1; } 100% { opacity: 0; } }
+@media (max-width: 700px) { @keyframes eintro-logo { 0%, 68% { transform: none; opacity: 1; } 100% { transform: translate(calc(-50vw + 90px), calc(-50vh + 30px)) scale(0.4); opacity: 0; } } }
+
 /* ---------- Visualizador 3D (model-viewer) ---------- */
 .m3d { display: flex; flex-direction: column; gap: 14px; }
 .m3d__tabs { display: flex; flex-wrap: wrap; gap: 8px; }

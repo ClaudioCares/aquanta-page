@@ -21,7 +21,9 @@ export default function useReveal(dep) {
       cancelAnimationFrame(raf)
       raf = requestAnimationFrame(scan)
     })
-    mo.observe(document.body, { childList: true, subtree: true })
+    // también se vigilan los cambios de clase: si un componente reescribe la clase de un elemento ya
+    // mostrado y le quita .is-visible, se vuelve a observar para que no quede invisible
+    mo.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] })
     return () => {
       clearTimeout(t)
       cancelAnimationFrame(raf)

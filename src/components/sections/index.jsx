@@ -240,7 +240,9 @@ export function ClosingCta({ data = closingCta }) {
 
 /* ---------- 2.4 Oficinas ---------- */
 export function Offices({ data = officesData, deep = false }) {
-  // país resaltado: el mapa y las tarjetas se iluminan juntos al pasar el mouse
+  // país resaltado: el mapa y las tarjetas se iluminan juntos al pasar el mouse.
+  // En las tarjetas el resaltado va en data-active y no en la clase: si React reescribiera la clase,
+  // borraría .is-visible (la pone la animación de aparición) y la tarjeta quedaría invisible
   const [active, setActive] = useState(null)
   return (
     <section className={`section ${deep ? 'section--deep' : ''}`} id="oficinas">
@@ -249,7 +251,7 @@ export function Offices({ data = officesData, deep = false }) {
         <WorldMap points={data.items.filter((o) => o.geo).map((o) => ({ key: o.country, label: `${o.city}, ${o.country}`, geo: o.geo }))} active={active} onActive={setActive} />
         <div className="offices">
           {data.items.map((o, i) => (
-            <article key={o.country} className={`office ${active === o.country ? 'is-active' : ''}`} data-reveal={i + 1} onMouseEnter={() => setActive(o.country)} onMouseLeave={() => setActive(null)}>
+            <article key={o.country} className="office" data-active={active === o.country ? '' : undefined} data-reveal={i + 1} onMouseEnter={() => setActive(o.country)} onMouseLeave={() => setActive(null)}>
               <h3 className="office__country"><Icon name="pin" size={18} /> {o.country}</h3>
               <span className="office__company">{o.company}</span>
               <p>{o.address}</p>

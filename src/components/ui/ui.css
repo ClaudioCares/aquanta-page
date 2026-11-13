@@ -33,6 +33,18 @@
 /* ---------- Logo ---------- */
 .logo-lockup { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 3px; }
 .logo { height: 34px; width: auto; object-fit: contain; }
+/* Cambio de logo dentro de la línea de Energía: el normal se apaga y el de Energía entra con un barrido */
+.logo-swap { position: relative; display: inline-flex; align-items: center; }
+.logo--base { transition: opacity 0.45s var(--ease), filter 0.45s var(--ease); }
+.logo--energia { position: absolute; left: 0; top: 50%; height: 36px; max-width: none; transform: translateY(-50%); opacity: 0; clip-path: inset(0 100% 0 0); transition: opacity 0.3s var(--ease), clip-path 0.3s var(--ease); pointer-events: none; }
+.logo-swap::after { content: ''; position: absolute; top: -6px; bottom: -6px; left: 0; width: 3px; border-radius: 3px; background: var(--accent); box-shadow: 0 0 16px 4px rgba(var(--accent-rgb), 0.8); opacity: 0; pointer-events: none; }
+.logo-tagline { transition: opacity 0.4s var(--ease); }
+.is-energia .logo--base { opacity: 0; filter: blur(6px); }
+.is-energia .logo--energia { opacity: 1; clip-path: inset(0 0 0 0); transition: opacity 0.2s var(--ease) 0.25s, clip-path 0.9s var(--ease) 0.25s; }
+.is-energia .logo-swap::after { animation: logo-spark 1.15s var(--ease) 0.25s both; }
+.is-energia .logo-tagline { opacity: 0; }
+@keyframes logo-spark { 0% { opacity: 0; transform: translateX(0); } 12% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateX(156px); } }
+@media (prefers-reduced-motion: reduce) { .is-energia .logo-swap::after { animation: none; } .logo--energia, .is-energia .logo--energia { transition: opacity 0.2s; clip-path: none; } }
 .logo-text { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; font-size: 20px; letter-spacing: 0.02em; line-height: 1; }
 .logo-text__mark { height: 28px; width: 28px; object-fit: contain; }
 .logo-text__rest { font-weight: 400; }

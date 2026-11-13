@@ -64,7 +64,7 @@ export default function Header() {
       <header className={cls} onMouseLeave={leave}>
         <div className="header__inner">
           <Link to="/" className="header__logo" aria-label="Inicio AQuanta">
-            <Logo />
+            <Logo swap />
           </Link>
 
           <nav className="header__nav" aria-label="Principal">
