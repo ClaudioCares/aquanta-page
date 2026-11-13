@@ -35,3 +35,4 @@ public/img/menu/data-center.webp -> https://www.pexels.com/photo/4508751/
 public/img/menu/ciberseguridad.webp -> https://www.pexels.com/photo/9951077/
 public/img/menu/cloud.webp -> https://www.pexels.com/photo/12537427/
 public/img/menu/servicios-profesionales.webp -> https://www.pexels.com/photo/1181376/
+club-tech.mp4               -> Giphy, animacion de Butlerm: https://giphy.com/gifs/tech-technology-mograph-pOEbLRT4SwD35IELiQ  (CONFIRMAR permiso de uso comercial; resolucion baja, 480x270)

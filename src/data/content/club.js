@@ -9,7 +9,7 @@ export const club = {
     eyebrow: 'ENCUENTRO · TECNOLOGÍA · PERSONAS · FUTURO',
     h1: 'Club de Ingenieros AQuanta 2026',
     img: '/img/case-1.jpg',
-    video: '/video/club.mp4', // clip de Pexels (ver public/video/CREDITOS.txt)
+    video: '/video/club-tech.mp4', // animación de Giphy indicada por AQuanta (ver public/video/CREDITOS.txt); el anterior era /video/club.mp4
   },
   chronicle: {
     title: 'Estamos con el corazón contento',
