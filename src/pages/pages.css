@@ -33,6 +33,10 @@
 .etab__intro-text .lead { font-size: clamp(14px, 1vw, 15.5px); color: rgba(255, 255, 255, 0.78); }
 .etab__intro-img { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-lg); overflow: hidden; background: #e9edf2; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08); }
 .etab__intro-img::after { content: ''; position: absolute; inset: 0; background: radial-gradient(600px 300px at 20% 110%, rgba(var(--accent-rgb), 0.25), transparent 60%); pointer-events: none; }
+.etab__intro-img--3d { background: radial-gradient(120% 90% at 50% 25%, #414957 0%, #171a1f 100%); }
+.mbuild { position: absolute; inset: 0; }
+.mbuild canvas { display: block; width: 100%; height: 100%; }
+.mbuild__msg { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; font-size: 12px; color: var(--muted); }
 .etab__intro-img img,
 .etab__intro-img video { width: 100%; height: 100%; object-fit: cover; display: block; }
 /* YouTube en bucle (YouTubeLoop): se agranda para que no se vean barras ni interfaz y no recibe clics */

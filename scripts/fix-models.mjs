@@ -175,7 +175,7 @@ function fixTta(g, glb) {
 // La escena de SketchUp trae el objeto principal junto a copias, piezas sueltas y líneas sin agrupar.
 // Se conserva solo lo que cae dentro de la zona indicada (x/z en metros) y los materiales pasan de
 // "unlit" (planos, todo se ve blanco) a materiales con sombreado.
-function fixSketchup(g, { label, x, z }) {
+function fixSketchup(g, { label, x, z, drop }) {
   const info = index(g)
   const root = g.scenes[g.scene || 0].nodes[0]
   delete g.nodes[root].mesh // caras sueltas dibujadas fuera de todo grupo
@@ -188,6 +188,16 @@ function fixSketchup(g, { label, x, z }) {
     if (inside) kept.push(c); else removed++
   }
   g.nodes[root].children = kept
+  // piezas a quitar por nombre en cualquier nivel (por ejemplo, un logo pegado en una puerta)
+  let dropped = 0
+  if (drop) {
+    // drop(nombre, nombres de los nodos padre) -> true si la pieza se quita
+    const prune = (i, path) => { const n = g.nodes[i]; if (!n.children) return
+      const here = [...path, n.name || '']
+      n.children = n.children.filter((c) => { if (drop(g.nodes[c].name || '', here)) { dropped++; return false } return true })
+      n.children.forEach((c) => prune(c, here)) }
+    prune(root, [])
+  }
   for (const m of g.materials || []) {
     if (m.extensions) { delete m.extensions.KHR_materials_unlit; if (!Object.keys(m.extensions).length) delete m.extensions }
     m.pbrMetallicRoughness = { ...(m.pbrMetallicRoughness || {}), metallicFactor: 0, roughnessFactor: 0.75 }
@@ -197,7 +207,7 @@ function fixSketchup(g, { label, x, z }) {
     if (!m.pbrMetallicRoughness.baseColorTexture && Math.min(c[0], c[1], c[2]) > 0.9) m.pbrMetallicRoughness.baseColorFactor = [0.62, 0.64, 0.66, c[3] ?? 1]
   }
   for (const k of ['extensionsUsed', 'extensionsRequired']) if (g[k]) { g[k] = g[k].filter((e) => e !== 'KHR_materials_unlit'); if (!g[k].length) delete g[k] }
-  console.log(`${label}: ${kept.length} conjuntos conservados, ${removed} fuera de la zona quitados`)
+  console.log(`${label}: ${kept.length} conjuntos conservados, ${removed} fuera de la zona quitados${drop ? `, ${dropped} piezas quitadas por nombre` : ''}`)
 }
 
 /* ---------- Modelos de SimLab: nodos con matriz deformada ---------- */
@@ -225,17 +235,21 @@ const jobs = [
   [SRC, '326 - AQANTA - TTA MANTOS VERDES.glb', 'tablero-tta.glb', fixTta],
   [SRC, 'INGENEO - RPP - 3D SIEMENS 1.glb', 'tablero-rpp-siemens.glb', fixRpp],
   // Orion: la escena trae dos copias del tablero; se publica la abierta (x 3..5), que muestra el interior
-  [MODELOS, 'TABLERO_ORION_250.glb', 'tablero-orion-250.glb', (g, glb) => { fixSketchup(g, { label: 'Orion', x: [2, 6], z: [-4, 1] }); optimize(glb, { label: 'Orion', budget: 1_200_000 }) }],
+  [MODELOS, 'TABLERO_ORION_250.glb', 'tablero-orion-250.glb', (g, glb) => { fixSketchup(g, { label: 'Orion', x: [2, 6], z: [-4, 1], drop: (name, path) => /^logo$/i.test(name) || (/^LettreLegrand/i.test(name) && path.includes('PANEL')) }) /* logo suelto y letras de marca grabadas en el frente de la puerta */; optimize(glb, { label: 'Orion', budget: 1_200_000 }) }],
   // Sala: el resto de la escena son piezas de repuesto y contenedores lejos de la sala
   [MODELOS, 'SALA_ELECTRICA_3.5.glb', 'sala-electrica.glb', (g, glb) => { fixSketchup(g, { label: 'Sala', x: [-5, 21.5], z: [-50.5, -43.5] }); optimize(glb, { label: 'Sala', budget: 1_200_000 }) }],
   // Electrohub: 262 MB y 23 M de triángulos en origen; se quita la figura de escala y se aligera para la web
   [MODELOS, 'ELECTROHUB.glb', 'nexvolthub.glb', (g, glb) => { fixSketchup(g, { label: 'NexVoltHub', x: [-0.1, 8], z: [-4, 4] }); optimize(glb, { label: 'NexVoltHub', budget: 2_000_000 }) }],
   // Tablero general (SimLab): viene limpio, solo se aligera
   [MODELOS, 'TG - OPEN MACUL.glb', 'tablero-general.glb', (g, glb) => optimize(glb, { label: 'TG', budget: 1_500_000 })],
+  // versión liviana del mismo tablero para la animación de construcción de la intro de Tableros
+  [MODELOS, 'TG - OPEN MACUL.glb', 'tablero-general-lite.glb', (g, glb) => optimize(glb, { label: 'TG liviano', budget: 300_000 })],
   // Sala con filas de equipos (SimLab): 62 M de triángulos en origen por las piezas repetidas
   [MODELOS, 'GTD SALAS.glb', 'sala-equipos.glb', (g, glb) => { flattenSheared(g, 'Sala equipos'); optimize(glb, { label: 'Sala equipos', budget: 2_500_000 }) }],
   // Sala eléctrica de una planta de 3,5 MVA (SimLab): viene limpia, solo se compacta
   [MODELOS, 'SALA ELECTRICA bess.glb', 'sala-electrica-3-5-mva.glb', (g, glb) => { flattenSheared(g, 'Sala 3,5 MVA'); optimize(glb, { label: 'Sala 3,5 MVA', budget: 1_500_000 }) }],
+  // Sala BESS (SimLab): viene limpia; se compacta y se aligera un poco
+  [MODELOS, 'SALA BESS.glb', 'sala-bess.glb', (g, glb) => { flattenSheared(g, 'Sala BESS'); optimize(glb, { label: 'Sala BESS', budget: 2_000_000 }) }],
 ]
 const only = process.argv[3] // opcional: procesar solo los destinos que contengan este texto
 await ready

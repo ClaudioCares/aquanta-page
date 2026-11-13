@@ -67,6 +67,7 @@ export const energia = {
       anchors: [
         { label: 'Generación FV', to: '#fv' },
         { label: 'Almacenamiento', to: '#almacenamiento' },
+        { label: 'Visualizador 3D', to: '#bess-3d' },
         { label: 'Sigenergy', to: '#sigenergy' },
         { label: 'Energía propia', to: '#energia-propia' },
       ],
@@ -110,6 +111,17 @@ export const energia = {
           img: '/img/energia/s1-2.webp',
           type: 'text',
           text: 'No vendemos equipos sueltos: diseñamos, construimos y operamos. Integramos paneles FV, sistemas BESS, UPS y centro de datos en una arquitectura única y funcional, con experiencia comprobada desde faenas mineras en altura hasta plantas industriales complejas.',
+        },
+        {
+          id: 'bess-3d',
+          eyebrow: 'VISUALIZADOR 3D',
+          title: 'Recorre una planta BESS en 3D',
+          lead: 'Modelo de ingeniería de una planta de almacenamiento en baterías de 3,6 MVA proyectada por AQuanta. Gírala y acércate para revisar la distribución de los equipos.',
+          type: 'model3d',
+          // Archivo en public/models (exportado desde SimLab). CONFIRMAR nombre visible y permiso para publicar el modelo
+          models: [
+            { key: 'sala-bess', label: 'Planta BESS 3,6 MVA', src: '/models/sala-bess.glb?v=2', orbit: '30deg 62deg 62%' },
+          ],
         },
         {
           id: 'sigenergy',
@@ -202,8 +214,9 @@ export const energia = {
         text: 'Diseñamos, fabricamos y montamos tableros eléctricos certificados para TI, industria y energía: desde el levantamiento en terreno hasta la puesta en servicio, con ingeniería propia y pruebas en planta.',
         img: '/img/energia/tableros-1.webp', // sala de tableros (Pexels); TODO: foto de tablero AQuanta
         video: '',
-        // Tramo 2:16 a 2:40 del video de YouTube indicado por el área (se incrusta en bucle, silenciado). TODO: reemplazar por un MP4 propio o del fabricante cuando exista
-        youtube: { id: 'io0HeA1EzQY', start: 136, end: 160 },
+        // Animación de construcción hecha con un modelo propio (tablero general): se arma de abajo hacia arriba mientras gira.
+        // Reemplaza al video de YouTube incrustado, que mostraba la pausa y la portada del reproductor
+        model: '/models/tablero-general-lite.glb?v=1',
       },
       sections: [
         {
@@ -228,7 +241,7 @@ export const energia = {
           models: [
             { key: 'tta', label: 'Tablero de transferencia automática (TTA)', src: '/models/tablero-tta.glb?v=4' },
             { key: 'rpp', label: 'Tablero RPP · Siemens', src: '/models/tablero-rpp-siemens.glb?v=2' },
-            { key: 'orion', label: 'Tablero Orion 250', src: '/models/tablero-orion-250.glb?v=5' },
+            { key: 'orion', label: 'Tablero para 3 o 4 fuentes de energía', src: '/models/tablero-orion-250.glb?v=8' },
             { key: 'tg', label: 'Tablero general (TG)', src: '/models/tablero-general.glb?v=1' },
           ],
         },

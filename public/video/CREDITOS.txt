@@ -24,7 +24,7 @@ sigenergy.mp4       -> Sigenergy SigenStack (detalle de producto), tomado de htt
 fv-gestion.mp4      -> Huawei Solar: https://solar.huawei.com/-/media/SolarV4/images/Professionals/MoreEnergy-02.mp4
 sitios-remotos.mp4  -> Huawei Solar: https://solar.huawei.com/-/media/SolarV4/images/Professionals/MoreEnergy-01.mp4
 salas-electricas.mp4 -> Precision: https://www.precision.tech/media/industria/salas/banner%20salas%20el%C3%A9ctricas%20(6%20mb).mp4
-Tableros (intro)    -> YouTube incrustado https://www.youtube.com/watch?v=io0HeA1EzQY (2:16 a 2:40), no se descarga
+Tableros (intro)    -> ya no usa video: animacion 3D propia con public/models/tablero-general-lite.glb
 
 C) Fotos de Pexels (licencia Pexels)
 public/img/energia/tableros-1.webp -> https://www.pexels.com/photo/33706880/

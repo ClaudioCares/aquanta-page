@@ -9,6 +9,7 @@ import SmartLink from '../../components/ui/SmartLink.jsx'
 import MiniForm from '../../components/forms/MiniForm.jsx'
 import YouTubeLoop from '../../components/ui/YouTubeLoop.jsx'
 import ModelViewer3D from '../../components/ui/ModelViewer3D.jsx'
+import ModelBuild3D from '../../components/ui/ModelBuild3D.jsx'
 import Typewriter from '../../components/sections/Typewriter.jsx'
 import { PageHero, SectionHead, CardGrid, Steps, Accordion, Compare, LogoWall, Team, ClosingCta } from '../../components/sections/index.jsx'
 import { scrollToTarget } from '../../hooks/useSmoothScroll.js'
@@ -115,8 +116,10 @@ export default function Energia() {
                   <MiniForm button={d.miniForm.button} subject={`Solicitud de presentación: ${t.label}`} />
                 </div>
               </div>
-              <div className="etab__intro-img" data-reveal="2">
-                {t.intro.youtube ? (
+              <div className={`etab__intro-img ${t.intro.model ? 'etab__intro-img--3d' : ''}`} data-reveal="2">
+                {t.intro.model ? (
+                  <ModelBuild3D src={t.intro.model} label={t.intro.title} />
+                ) : t.intro.youtube ? (
                   <YouTubeLoop id={t.intro.youtube.id} start={t.intro.youtube.start} end={t.intro.youtube.end} title={t.intro.title} />
                 ) : t.intro.video ? (
                   <video src={t.intro.video} poster={t.intro.img} autoPlay muted loop playsInline aria-hidden="true" />

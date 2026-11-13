@@ -68,6 +68,7 @@ export default function ModelViewer3D({ models }) {
               alt={`Modelo 3D: ${m.label}`}
               camera-controls=""
               camera-orbit={m.orbit || '-35deg 78deg 105%'}
+              min-camera-orbit="auto auto 15%"
               field-of-view="16deg"
               min-field-of-view="3deg"
               max-field-of-view="16deg"
